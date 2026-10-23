@@ -21,7 +21,6 @@ const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: SITE.name,
-  alternateName: SITE.en,
   jobTitle: '全栈工程师 / AI Agent 与云安全',
   description: SITE.description,
   url: SITE.siteUrl,
@@ -37,8 +36,8 @@ const structuredData = {
       <div class="hero-copy">
         <p class="hero-kicker">Full-stack · AI Agent / Cloud security</p>
         <h1>
-          <span class="name">邵敏峰</span>
-          <span class="en">Allen Shao</span>
+          <span class="name">{SITE.name}</span>
+          <span class="en">Portfolio · 2026</span>
         </h1>
         <p class="hero-line">把 AI 从「会聊天」<br />做成<em>「能干活」</em>。</p>
         <p class="hero-desc">
@@ -78,7 +77,7 @@ const structuredData = {
             <strong>500×</strong>
             <span>Three-year growth</span>
           </div>
-          <div class="seal-float" aria-hidden="true">邵</div>
+          <div class="seal-float" aria-hidden="true">AS</div>
         </div>
       </div>
     </div>
@@ -269,7 +268,7 @@ const structuredData = {
       <div class="about-copy">
         <p class="about-statement">做平台，也写代码。<br />把踩过的坑，写清楚。</p>
         <p>
-          我是邵敏峰，一名全栈工程师。过去三年，我大部分时间在做一件事：把大模型从「演示」变成「可用的内部产品」——模型接入、Agent 工具、成本治理、权限与可观测性。
+          我是 Allen Shao，一名全栈工程师。过去三年，我大部分时间在做一件事：把大模型从「演示」变成「可用的内部产品」——模型接入、Agent 工具、成本治理、权限与可观测性。
         </p>
         <p>
           我也写代码。TypeScript、Node.js、Python，从 API Gateway 到前端 Portal，从 MCP Server 到静态站点。技术选型的原则很简单：能被替换，能被审计，能被团队接手。

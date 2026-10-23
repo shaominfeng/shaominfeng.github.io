@@ -1,5 +1,5 @@
 /* ————————————————————————————————
-   邵敏峰 · personal site
+   Allen Shao · personal site
    ———————————————————————————————— */
 
 :root {
@@ -162,7 +162,7 @@ a {
   background: var(--accent);
   color: #fff;
   font-family: var(--serif);
-  font-size: 21px;
+  font-size: 16px;
   line-height: 1;
   border-radius: 2px;
   box-shadow: 2px 3px 0 rgba(23, 20, 15, 0.14);
@@ -402,7 +402,8 @@ a {
 
 .hero h1 .name {
   display: block;
-  font-size: clamp(78px, 10.5vw, 146px);
+  font-size: clamp(60px, 7.8vw, 112px);
+  letter-spacing: -0.025em;
 }
 
 .hero h1 .en {
@@ -2075,7 +2076,7 @@ a.section-note:hover {
   }
 
   .hero h1 .name {
-    font-size: clamp(74px, 14vw, 118px);
+    font-size: clamp(56px, 9vw, 96px);
   }
 
   .about-grid,
@@ -2189,7 +2190,7 @@ a.section-note:hover {
   }
 
   .hero h1 .name {
-    font-size: clamp(66px, 19vw, 96px);
+    font-size: clamp(48px, 14vw, 72px);
   }
 
   .hero-line {

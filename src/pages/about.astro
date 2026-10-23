@@ -5,14 +5,13 @@ import { SITE } from '../data/site';
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
-  name: '关于邵敏峰',
+  name: '关于 Allen Shao',
   description: SITE.description,
   url: new URL('/about/', Astro.site).toString(),
   mainEntity: {
     '@type': 'Person',
     name: SITE.name,
-    alternateName: SITE.en,
-    jobTitle: '全栈工程师 / AI Agent 与云安全',
+      jobTitle: '全栈工程师 / AI Agent 与云安全',
     email: 'mailto:' + SITE.email,
     url: SITE.siteUrl,
     sameAs: [SITE.github],
@@ -20,19 +19,19 @@ const structuredData = {
 };
 ---
 
-<BaseLayout title="关于" description="邵敏峰，全栈工程师，专注 AI Agent、云安全与开发者体验。3 年企业 AI 平台实践。" structuredData={structuredData}>
+<BaseLayout title="关于" description="Allen Shao，全栈工程师，专注 AI Agent、云安全与开发者体验。3 年企业 AI 平台实践。" structuredData={structuredData}>
   <div class="shell about-hero">
     <div>
       <p class="label">About / Allen Shao</p>
       <h1>写代码，<br />也写清楚。</h1>
       <p>
-        我是邵敏峰，一名全栈工程师。过去三年，我在做一件事：把大模型从「演示」变成「可用的内部产品」。
+        我是 Allen Shao，一名全栈工程师。过去三年，我在做一件事：把大模型从「演示」变成「可用的内部产品」。
         做平台，也写代码；做工程，也写复盘。
       </p>
     </div>
     <div class="about-mark" aria-hidden="true">
-      <span>邵</span>
-      <small>SHAO MINFENG · 2026</small>
+      <span>AS</span>
+      <small>ALLEN SHAO · 2026</small>
     </div>
   </div>
 

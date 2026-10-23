@@ -1,6 +1,6 @@
 # shaominfeng.github.io
 
-邵敏峰的个人主页：个人介绍 + 两个清晰入口（文章 / 项目）。
+Allen Shao 的个人主页：个人介绍 + 两个清晰入口（文章 / 项目）。
 
 **Live: https://shaominfeng.github.io/**
 

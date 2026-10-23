@@ -9,8 +9,7 @@ interface Props {
 const { to, label } = Astro.props;
 ---
 
-<BaseLayout title={'正在前往' + label} description={'页面已移动，正在跳转到' + label} noindex>
-  <meta slot="head" http-equiv="refresh" content={'0;url=' + to} />
+<BaseLayout title={'正在前往' + label} description={'页面已移动，正在跳转到' + label} noindex redirect={to}>
   <div class="shell notfound">
     <span class="code">→</span>
     <h1>正在前往{label}</h1>

@@ -17,6 +17,7 @@ interface Props {
   type?: string;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
+  redirect?: string;
 }
 
 const {
@@ -26,6 +27,7 @@ const {
   type = 'website',
   structuredData,
   noindex = false,
+  redirect,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -41,6 +43,7 @@ const fullTitle = title === SITE.name ? SITE.name + ' · ' + SITE.role : title +
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {redirect && <meta http-equiv="refresh" content={'0;url=' + redirect} />}
     <meta name="author" content={SITE.name} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 

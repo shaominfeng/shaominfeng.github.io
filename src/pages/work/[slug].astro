@@ -39,7 +39,7 @@ const structuredData = {
     <nav class="breadcrumb" aria-label="面包屑">
       <a href="/">首页</a>
       <span>/</span>
-      <a href="/work/">作品</a>
+      <a href="/work/">项目</a>
       <span>/</span>
       <span>{String(index + 1).padStart(2, '0')}</span>
     </nav>
@@ -118,7 +118,7 @@ const structuredData = {
         {project.repo && (
           <a class="btn btn-ghost" href={project.repo} target="_blank" rel="noopener noreferrer">源代码 ↗</a>
         )}
-        <a class="btn btn-ghost" href="/work/">全部作品</a>
+        <a class="btn btn-ghost" href="/work/">全部项目</a>
       </div>
 
       {project.note && <p class="case-note">{project.note}</p>}

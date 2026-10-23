@@ -1,12 +1,37 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
 ---
 
 <BaseLayout title="页面不存在" description="这个页面不存在，回到首页继续浏览。" noindex>
   <div class="shell notfound">
     <span class="code">404</span>
     <h1>这里什么也没有</h1>
-    <p>链接可能已经移动，或者从未存在。</p>
-    <a class="btn btn-primary" href="/">回到首页 <span aria-hidden="true">→</span></a>
+    <p>链接可能已经移动。旧的报告链接会自动跳转到新的文章集。</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn btn-primary" href="/">回到首页 <span aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost" href={SITE.blogUrl}>去文章集</a>
+    </div>
   </div>
+
+  <script is:inline>
+    (() => {
+      const p = location.pathname;
+      if (p === '/writing/' || p.startsWith('/writing/')) {
+        location.replace('/blog/');
+        return;
+      }
+      if (p === '/work/ai-evolution/' || p.startsWith('/work/ai-evolution/')) {
+        location.replace('/blog/ai-evolution/');
+        return;
+      }
+      if (p.startsWith('/ai-evolution/')) {
+        const rest = p.slice('/ai-evolution/'.length);
+        if (!rest) location.replace('/blog/ai-evolution/');
+        else if (rest === 'about/' || rest === 'about') location.replace('/blog/about/');
+        else if (rest.startsWith('read/')) location.replace('/blog/ai-evolution/' + rest.slice(5));
+        else location.replace('/blog/ai-evolution/' + rest);
+      }
+    })();
+  </script>
 </BaseLayout>

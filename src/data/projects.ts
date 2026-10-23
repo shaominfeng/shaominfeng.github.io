@@ -33,60 +33,8 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    slug: 'ai-evolution',
-    index: '01',
-    title: '从对话到协作',
-    en: 'AI Evolution · 2022—2026',
-    tagline: 'AI 大模型三年演进全记录',
-    description:
-      '14 章、2.1 万字，把 2022.11 到 2026.01 的模型、协议与产品放回同一条时间线，解释每一次跃迁解决了什么，又留下了什么。',
-    year: '2026',
-    role: '作者 / 研究整理',
-    stack: ['Research', 'Astro', 'Markdown', 'GitHub Pages'],
-    status: '已发布',
-    demo: 'https://shaominfeng.github.io/ai-evolution/',
-    demoLabel: '在线阅读',
-    repo: 'https://github.com/shaominfeng/ai-evolution',
-    cover: '/images/report-cover.webp',
-    coverAlt: 'AI 能力演进：从 2022 年对话 AI 到 2026 年协作 AI',
-    coverCaption: 'Fig. 01 — AI 能力演进，2022 → 2026',
-    metrics: [
-      { value: '14', label: '章' },
-      { value: '2.1 万', label: '字' },
-      { value: '17', label: '份参考' },
-      { value: '500×', label: '上下文增长' },
-    ],
-    sections: [
-      {
-        title: '为什么做',
-        paragraphs: [
-          '2022 到 2026，AI 的新闻太多，理解太少。参数、榜单、发布会每天都在变，但很少有人把「为什么出现这项技术、它解决了什么问题、又留下了什么新问题」串起来。',
-          '这份报告最初是给团队新人的一份材料。写着写着发现，它也在检验我自己：是不是真的理解每一次跃迁的因果，而不是只会复述结论。',
-        ],
-      },
-      {
-        title: '做了什么',
-        paragraphs: [
-          '以 2022.11—2026.01 为跨度，拆成 14 章：1 章总览、1 章餐厅类比、5 个年份、4 个技术深潜、1 个企业案例、1 个展望。每章都有核心问题、时间线、数据表和可迁移的判断。',
-          '技术上是一个静态站点：Markdown 内容、Astro 构建、自托管字体、WebP 图片，没有后端，也没有追踪脚本。',
-        ],
-        bullets: [
-          '把 21MB 原始图片压到约 1.4MB，移动端首屏仍然清晰',
-          '为每章生成独立目录、阅读进度、上一章/下一章与 RSS',
-          '企业案例做脱敏处理，只保留可迁移的方法',
-        ],
-      },
-      {
-        title: '结果',
-        paragraphs: [
-          '从一份内部长文档，变成可以在线阅读、可以单独分享章节、也可以在手机上读完的公开报告。上线后收到最多的反馈是：「终于有人把这条线讲清楚了。」',
-        ],
-      },
-    ],
-  },
-  {
     slug: 'ai-hot-daily',
-    index: '02',
+    index: '01',
     title: 'AI HOT · 每日晨报',
     en: 'AI HOT Daily',
     tagline: '把每天 6 条 AI 新闻，压成 5 分钟晨报',
@@ -137,7 +85,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: 'enterprise-ai-platform',
-    index: '03',
+    index: '02',
     title: '企业 AI 平台',
     en: 'Enterprise AI Platform',
     tagline: '从 POC 到 4000+ 用户的三年',
@@ -148,7 +96,7 @@ export const PROJECTS: Project[] = [
     stack: ['TypeScript', 'Node.js', 'MCP', 'Dify', 'OIDC'],
     status: '内部系统',
     demoLabel: '阅读完整案例',
-    demo: 'https://shaominfeng.github.io/ai-evolution/read/enterprise-case/',
+    demo: 'https://shaominfeng.github.io/blog/ai-evolution/enterprise-case/',
     cover: '/images/platform-cover.webp',
     coverAlt: '用户调用模型的完整架构示意图',
     coverCaption: '平台能力分层（示意）',

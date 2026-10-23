@@ -1,0 +1,48 @@
+/* ——— projects roadmap ——— */
+
+.future-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.future-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+}
+
+.future-num {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+.future-card h3 {
+  margin: 18px 0 8px;
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.future-card p {
+  margin: 0 0 20px;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--ink-3);
+}
+
+.future-card .tag {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .future-grid {
+    grid-template-columns: 1fr;
+  }
+}

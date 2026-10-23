@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Props {
+  to: string;
+  label: string;
+}
+
+const { to, label } = Astro.props;
+---
+
+<BaseLayout title={'正在前往' + label} description={'页面已移动，正在跳转到' + label} noindex>
+  <meta slot="head" http-equiv="refresh" content={'0;url=' + to} />
+  <div class="shell notfound">
+    <span class="code">→</span>
+    <h1>正在前往{label}</h1>
+    <p>页面已经移动。如果没有自动跳转，<a href={to}>点这里</a>。</p>
+  </div>
+  <script is:inline define:vars={{ to }}>
+    location.replace(to);
+  </script>
+</BaseLayout>

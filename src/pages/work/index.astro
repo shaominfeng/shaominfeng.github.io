@@ -5,20 +5,21 @@ import { SITE } from '../../data/site';
 ---
 
 <BaseLayout
-  title="作品"
-  description="邵敏峰的作品：AI 演进报告、AI HOT 每日晨报、企业 AI 平台。每个项目都有可访问的在线 Demo 或完整案例。"
+  title="项目"
+  description="邵敏峰的项目：AI HOT 每日晨报、企业 AI 平台。每个项目都有在线 Demo 或完整案例，更多项目正在构建。"
 >
   <div class="shell page-hero">
-    <p class="label">Work / 2023—2026</p>
-    <h1>作品</h1>
+    <p class="label">Projects / 2023—2026</p>
+    <h1>项目</h1>
     <p>
-      三个项目，三种尺度：一份 2.1 万字的公开报告，一个每天更新的小工具，一个 4,000+ 用户的企业平台。
-      共同点是——都从真实问题出发，也都留下了可以复用的方法。
+      做过的东西，能在线点的都在这里。两个已上线，一个内部案例，更多正在构建。
+      每一个都从真实问题出发，也尽量留下可以复用的方法。
     </p>
     <div class="page-meta">
       <span>{PROJECTS.length} 个项目</span>
-      <span>2 个在线 Demo</span>
-      <span>1 个企业案例（脱敏）</span>
+      <span>1 个在线 Demo</span>
+      <span>1 个内部案例（脱敏）</span>
+      <span>更多在构建</span>
     </div>
   </div>
 
@@ -60,6 +61,42 @@ import { SITE } from '../../data/site';
           </a>
         </article>
       ))}
+    </div>
+  </section>
+
+  <section class="shell section" id="building">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">02</span>
+        <h2 class="section-title">正在构建</h2>
+      </div>
+      <span class="section-note">Roadmap</span>
+    </div>
+
+    <div class="future-grid">
+      <div class="future-card">
+        <span class="future-num">01</span>
+        <h3>MCP 工具集</h3>
+        <p>把内部系统接进 Agent 的可复用工具层。从认证、权限到审计，做成可以安装的组件。</p>
+        <span class="tag">探索中</span>
+      </div>
+      <div class="future-card">
+        <span class="future-num">02</span>
+        <h3>Agent 工作流</h3>
+        <p>从任务拆解、执行到验收的工程化模板。目标不是更炫的 Demo，而是可回滚的生产流程。</p>
+        <span class="tag">设计中</span>
+      </div>
+      <div class="future-card">
+        <span class="future-num">03</span>
+        <h3>开发者效率实验</h3>
+        <p>用更小的工具缩短反馈回路：一个脚本、一个页面，或者一个下午能做完的东西。</p>
+        <span class="tag">持续</span>
+      </div>
+    </div>
+
+    <div class="section-foot">
+      <span>想一起做点什么？或者你有一个值得被做出来的想法。</span>
+      <a class="text-link" href={'mailto:' + SITE.email}>聊聊 →</a>
     </div>
   </section>
 </BaseLayout>

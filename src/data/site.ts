@@ -8,15 +8,16 @@ export const SITE = {
   email: 'shaominfeng8@gmail.com',
   github: 'https://github.com/shaominfeng',
   siteUrl: 'https://shaominfeng.github.io',
-  reportUrl: 'https://shaominfeng.github.io/ai-evolution/',
-  reportRepo: 'https://github.com/shaominfeng/ai-evolution',
+  blogUrl: 'https://shaominfeng.github.io/blog/',
+  seriesUrl: 'https://shaominfeng.github.io/blog/ai-evolution/',
+  blogRepo: 'https://github.com/shaominfeng/blog',
   aiHotUrl: 'https://shaominfeng.github.io/ai-hot-daily/',
   aiHotRepo: 'https://github.com/shaominfeng/ai-hot-daily',
   updated: '2026.10',
 };
 
 export const NAV = [
-  { href: '/work/', label: '作品' },
-  { href: '/writing/', label: '写作' },
+  { href: '/work/', label: '项目' },
+  { href: SITE.blogUrl, label: '文章' },
   { href: '/about/', label: '关于' },
 ];

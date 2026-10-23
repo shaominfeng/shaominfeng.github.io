@@ -36,6 +36,21 @@ npm run preview
 - 文章列表：`src/data/articles.ts`
 - 站点信息：`src/data/site.ts`
 
+## 部署
+
+GitHub Pages 的 `gh-pages` 分支发布：
+
+```bash
+npm run build
+cd dist
+touch .nojekyll
+git init -b gh-pages
+git add -A && git commit -m "Deploy"
+git push -f <your-remote> gh-pages
+```
+
+仓库设置 → Pages → Source 选择 `gh-pages` 分支。
+
 ## 相关
 
 - 技术报告：https://shaominfeng.github.io/ai-evolution/

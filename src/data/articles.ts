@@ -11,7 +11,19 @@ export interface Article {
 
 const BLOG = 'https://shaominfeng.github.io/blog/ai-evolution';
 
+
 export const FEATURED_ARTICLES: Article[] = [
+  {
+    slug: 'a-day-of-agentic-coding',
+    title: '工程师 Agentic Coding 的一天',
+    subtitle: '当 AI 从「工具」变成「一直在跑的同事」',
+    excerpt:
+      '从 09:00 的自动晨报到 18:00 的最后一轮巡检：一个工程师怎样把 AI 嵌进工单、调试、开发、复盘与工具改进，让时间从「排队」变成「重叠」。',
+    minutes: 19,
+    part: '单篇',
+    tags: ['Agentic Coding', '工作流'],
+    href: 'https://shaominfeng.github.io/blog/essays/a-day-of-agentic-coding/',
+  },
   {
     slug: 'context-revolution',
     title: '上下文革命：从 4K 到 2M',

@@ -1,0 +1,34 @@
+---
+import { SITE } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="seal" aria-hidden="true">邵</span>
+        <div>
+          <strong>邵敏峰</strong>
+          <span>ALLEN SHAO · {SITE.role}</span>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="/work/">作品</a>
+        <a href="/writing/">写作</a>
+        <a href="/about/">关于</a>
+        <a href={'mailto:' + SITE.email}>Email</a>
+        <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        <a href="/rss.xml">RSS</a>
+      </div>
+      <p class="footer-note">
+        做平台，也写代码。把踩过的坑，写清楚。
+        <em>Keep Passion.</em>
+      </p>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 {SITE.name} · {SITE.en}</span>
+      <span>用 Astro 构建 · 部署于 GitHub Pages · 无跟踪脚本</span>
+      <span>最后更新 {SITE.updated}</span>
+    </div>
+  </div>
+</footer>

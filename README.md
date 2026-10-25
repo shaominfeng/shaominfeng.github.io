@@ -41,18 +41,17 @@ npm run preview
 
 ## 部署
 
-GitHub Pages 的 `gh-pages` 分支发布：
+推送到 `main` 即自动发布。`.github/workflows/deploy.yml` 会执行 `npm ci` → `npm run build`，并通过 GitHub Actions 部署到 Pages。
+
+仓库设置 → Pages → Source 应为 **GitHub Actions**。
+
+本地检查构建：
 
 ```bash
-npm run build
-cd dist
-touch .nojekyll
-git init -b gh-pages
-git add -A && git commit -m "Deploy"
-git push -f <your-remote> gh-pages
+npm ci
+npm run build      # 产物在 dist/
+npm run preview
 ```
-
-仓库设置 → Pages → Source 选择 `gh-pages` 分支。
 
 ## 相关
 

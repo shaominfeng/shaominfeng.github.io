@@ -1,0 +1,38 @@
+name: Deploy to EdgeOne Pages
+
+# 国内站部署。需在仓库 Settings → Secrets and variables → Actions 里配置：
+#   Variables: ENABLE_EDGEONE=1  SITE_URL=https://你的域名  EDGEONE_PROJECT=项目名
+#              PUBLIC_BAIDU_VERIFY=百度给的验证码（可选）
+#   Secrets:   EDGEONE_API_TOKEN=EdgeOne Pages 控制台生成的 API Token
+# ENABLE_EDGEONE 未设为 1 时本工作流自动跳过，不影响 GitHub Pages 部署。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    if: vars.ENABLE_EDGEONE == '1'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build (main + blog)
+        run: npm run build:all
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          PUBLIC_BAIDU_VERIFY: ${{ vars.PUBLIC_BAIDU_VERIFY }}
+          PUBLIC_BAIDU_PUSH: '1'
+
+      - name: Deploy to EdgeOne Pages
+        run: npx edgeone pages deploy ./dist -n "${{ vars.EDGEONE_PROJECT || 'shaominfeng-site' }}" -t "$EDGEONE_API_TOKEN"
+        env:
+          EDGEONE_API_TOKEN: ${{ secrets.EDGEONE_API_TOKEN }}

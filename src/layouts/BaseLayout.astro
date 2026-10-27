@@ -33,6 +33,19 @@ const {
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
 const fullTitle = title === SITE.name ? SITE.name + ' · ' + SITE.role : title + ' · ' + SITE.name;
+
+// 国内搜索引擎验证码（构建时通过环境变量注入，未设置则不输出）
+const BAIDU_VERIFY = import.meta.env.PUBLIC_BAIDU_VERIFY || '';
+const SO_VERIFY = import.meta.env.PUBLIC_360_VERIFY || '';
+const SOGOU_VERIFY = import.meta.env.PUBLIC_SOGOU_VERIFY || '';
+// 百度搜索资源平台「自动推送」，仅在国内域名构建时开启
+const BAIDU_PUSH = import.meta.env.PUBLIC_BAIDU_PUSH === '1';
+// 百度搜索资源平台「自动推送」：页面被访问时把该 URL 推给百度，加快收录
+const BAIDU_PUSH_SNIPPET =
+  '(function(){var bp=document.createElement("script");' +
+  'bp.src="https://zz.bdstatic.com/linksubmit/push.js";' +
+  'var s=document.getElementsByTagName("script")[0];' +
+  's.parentNode.insertBefore(bp,s);})();';
 ---
 
 <!doctype html>
@@ -46,6 +59,15 @@ const fullTitle = title === SITE.name ? SITE.name + ' · ' + SITE.role : title +
     {redirect && <meta http-equiv="refresh" content={'0;url=' + redirect} />}
     <meta name="author" content={SITE.name} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- 国内搜索引擎 / 浏览器适配 -->
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    {BAIDU_VERIFY && <meta name="baidu-site-verification" content={BAIDU_VERIFY} />}
+    {SO_VERIFY && <meta name="360-site-verification" content={SO_VERIFY} />}
+    {SOGOU_VERIFY && <meta name="sogou_site_verification" content={SOGOU_VERIFY} />}
 
     <meta property="og:type" content={type} />
     <meta property="og:title" content={fullTitle} />
@@ -75,5 +97,6 @@ const fullTitle = title === SITE.name ? SITE.name + ' · ' + SITE.role : title +
       <slot />
     </main>
     <SiteFooter />
+    {BAIDU_PUSH && <script is:inline set:html={BAIDU_PUSH_SNIPPET} />}
   </body>
 </html>

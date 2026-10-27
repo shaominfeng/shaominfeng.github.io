@@ -1,3 +1,5 @@
+const SITE_URL = (import.meta.env.SITE || 'https://shaominfeng.github.io').replace(/\/+$/, '');
+
 export const SITE = {
   name: 'Allen Shao',
   en: 'Allen Shao',
@@ -7,11 +9,11 @@ export const SITE = {
     'Allen Shao，全栈工程师，专注 AI Agent、云安全与开发者体验。3 年企业 AI 平台实践，写代码，也把踩过的坑写成 14 章系列和单篇长文。',
   email: 'shaominfeng8@gmail.com',
   github: 'https://github.com/shaominfeng',
-  siteUrl: 'https://shaominfeng.github.io',
-  blogUrl: 'https://shaominfeng.github.io/blog/',
-  seriesUrl: 'https://shaominfeng.github.io/blog/ai-evolution/',
+  siteUrl: SITE_URL,
+  blogUrl: SITE_URL + '/blog/',
+  seriesUrl: SITE_URL + '/blog/ai-evolution/',
   blogRepo: 'https://github.com/shaominfeng/blog',
-  aiHotUrl: 'https://shaominfeng.github.io/ai-hot-daily/',
+  aiHotUrl: SITE_URL + '/ai-hot-daily/',
   aiHotRepo: 'https://github.com/shaominfeng/ai-hot-daily',
   updated: '2026.10',
 };

@@ -9,7 +9,8 @@ export interface Article {
   href: string;
 }
 
-const BLOG = 'https://shaominfeng.github.io/blog/ai-evolution';
+const SITE_URL = (import.meta.env.SITE || 'https://shaominfeng.github.io').replace(/\/+$/, '');
+const BLOG = SITE_URL + '/blog/ai-evolution';
 
 
 export const FEATURED_ARTICLES: Article[] = [
@@ -22,7 +23,7 @@ export const FEATURED_ARTICLES: Article[] = [
     minutes: 19,
     part: '单篇',
     tags: ['Agentic Coding', '工作流'],
-    href: 'https://shaominfeng.github.io/blog/essays/a-day-of-agentic-coding/',
+    href: SITE_URL + '/blog/essays/a-day-of-agentic-coding/',
   },
   {
     slug: 'context-revolution',

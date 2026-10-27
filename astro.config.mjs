@@ -10,5 +10,15 @@ export default defineConfig({
   base: '/',
   trailingSlash: 'always',
   build: { format: 'directory' },
+  // 中文为默认语言，保留在根路径（/）；英文在 /en/ 下。
+  // redirectToDefaultLocale 必须关掉，否则 Astro 会把 / 重定向到 /zh/。
+  i18n: {
+    defaultLocale: 'zh',
+    locales: ['zh', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: false,
+    },
+  },
   integrations: [sitemap()],
 });

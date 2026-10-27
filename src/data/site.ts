@@ -1,3 +1,5 @@
+import { UI, localePath, type Lang } from '../i18n/ui';
+
 const SITE_URL = (import.meta.env.SITE || 'https://shaominfeng.github.io').replace(/\/+$/, '');
 
 export const SITE = {
@@ -18,8 +20,14 @@ export const SITE = {
   updated: '2026.10',
 };
 
-export const NAV = [
-  { href: '/work/', label: '项目' },
-  { href: SITE.blogUrl, label: '文章' },
-  { href: '/about/', label: '关于' },
-];
+/** 主导航（按语言生成，文章集指向中文博客） */
+export function getNav(lang: Lang) {
+  const t = UI[lang];
+  return [
+    { href: localePath('/work/', lang), label: t.nav.work },
+    { href: SITE.blogUrl, label: t.nav.writing },
+    { href: localePath('/about/', lang), label: t.nav.about },
+  ];
+}
+
+export const NAV = getNav('zh');

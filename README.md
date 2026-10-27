@@ -10,6 +10,7 @@ Allen Shao 的个人主页：个人介绍 + 文章与项目两个入口。
 - `/work/` — 项目。内容整理中，先按 `PROJECT_SLOTS` 预留占位
 - `/blog/` — 文章集，独立仓库部署（[blog](https://github.com/shaominfeng/blog)）
 - `/about/` — 个人介绍、技能与联系方式
+- `/en/`、`/en/work/`、`/en/about/` — 英文版，与上面一一对应
 - `/rss.xml` — 订阅精选文章
 - `/writing/`、`/ai-evolution/` — 旧链接，重定向到 `/blog/` 与 `/blog/ai-evolution/`
 
@@ -32,11 +33,21 @@ npm run preview
 ## 内容更新
 
 - 项目数据：`src/data/projects.ts` —— 往 `PROJECTS` 里加对象即可生成卡片与详情页；数组为空时按 `PROJECT_SLOTS` 渲染占位卡片
-- 首页文案：`src/pages/index.astro`
-- 项目页与路线图：`src/pages/work/index.astro`
-- 时间线：`src/data/timeline.ts`
-- 精选文章：`src/data/articles.ts`
+- 界面文案：`src/i18n/ui.ts` —— 中英文文案的唯一来源
+- 页面结构：`src/components/HomeView.astro`、`AboutView.astro`、`WorkView.astro` —— 中英文共用，按 `lang` 取文案
+- 时间线：`src/data/timeline.ts` —— 每条带 `en` 字段
+- 精选文章：`src/data/articles.ts` —— 每条带 `en` 字段（标题/摘要译成英文，正文仍为中文）
 - 站点信息：`src/data/site.ts`
+
+## 多语言
+
+中文在根路径，英文在 `/en/` 下，中文 URL 保持不变，两边各自是独立静态页（可被搜索引擎分别收录）。
+
+- 语言由路径判定：`getLangFromUrl(pathname)`；`/en/...` 为英文，其余为中文
+- 页头 `中 / EN` 切换器用 `swapLangPath()` 换算等价路径，例如 `/work/` ↔ `/en/work/`
+- `<head>` 自动输出 `hreflang`（zh-CN / en / x-default）与 `og:locale`，两版互为备选
+- 新增页面时：在 `src/i18n/ui.ts` 的 `zh` 里写文案，`en` 缺字段会报类型错误；页面用 `HomeView` 之类共用组件，再在 `src/pages/` 与 `src/pages/en/` 各放一个薄壳
+- `404.html` 只有一个产物，所以中英并列展示
 
 ## 部署
 

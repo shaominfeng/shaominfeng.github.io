@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AboutView from '../../components/AboutView.astro';
+import { SITE } from '../../data/site';
+import { UI } from '../../i18n/ui';
+
+const t = UI.en;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About Allen Shao',
+  description: t.meta.aboutDescription,
+  url: new URL('/en/about/', Astro.site).toString(),
+  mainEntity: {
+    '@type': 'Person',
+    name: SITE.name,
+    alternateName: '邵敏峰',
+    jobTitle: 'Full-stack engineer / AI agent & cloud security',
+    email: 'mailto:' + SITE.email,
+    url: SITE.siteUrl,
+    sameAs: [SITE.github],
+  },
+};
+---
+
+<BaseLayout title={t.meta.aboutTitle} description={t.meta.aboutDescription} structuredData={structuredData}>
+  <AboutView lang="en" />
+</BaseLayout>

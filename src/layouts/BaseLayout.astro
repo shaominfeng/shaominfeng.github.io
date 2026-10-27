@@ -9,6 +9,8 @@ import '../styles/pages.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { SITE } from '../data/site';
+import { UI, HTML_LANG, OG_LOCALE, getLangFromUrl, swapLangPath } from '../i18n/ui';
+
 
 interface Props {
   title: string;
@@ -22,7 +24,7 @@ interface Props {
 
 const {
   title,
-  description = SITE.description,
+  description,
   image = '/og.png',
   type = 'website',
   structuredData,
@@ -30,9 +32,19 @@ const {
   redirect,
 } = Astro.props;
 
+// 语言由当前路径决定：/en/... 为英文，其余为中文
+const lang = getLangFromUrl(Astro.url.pathname);
+const t = UI[lang];
+const metaDescription = description ?? t.meta.siteDescription;
+
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
-const fullTitle = title === SITE.name ? SITE.name + ' · ' + SITE.role : title + ' · ' + SITE.name;
+const fullTitle =
+  title === SITE.name ? SITE.name + ' · ' + t.meta.role : title + ' · ' + SITE.name;
+
+// 中文与英文路径互相等价，供搜索引擎与语言切换器使用
+const altZh = new URL(swapLangPath(Astro.url.pathname, 'zh'), Astro.site);
+const altEn = new URL(swapLangPath(Astro.url.pathname, 'en'), Astro.site);
 
 // 国内搜索引擎验证码（构建时通过环境变量注入，未设置则不输出）
 const BAIDU_VERIFY = import.meta.env.PUBLIC_BAIDU_VERIFY || '';
@@ -49,13 +61,20 @@ const BAIDU_PUSH_SNIPPET =
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang={HTML_LANG[lang]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonical} />
+    {!noindex && !redirect && (
+      <>
+        <link rel="alternate" hreflang="zh-CN" href={altZh} />
+        <link rel="alternate" hreflang="en" href={altEn} />
+        <link rel="alternate" hreflang="x-default" href={altZh} />
+      </>
+    )}
     {redirect && <meta http-equiv="refresh" content={'0;url=' + redirect} />}
     <meta name="author" content={SITE.name} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
@@ -71,14 +90,15 @@ const BAIDU_PUSH_SNIPPET =
 
     <meta property="og:type" content={type} />
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:site_name" content={SITE.name} />
-    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:locale" content={OG_LOCALE[lang]} />
+    <meta property="og:locale:alternate" content={OG_LOCALE[lang === 'zh' ? 'en' : 'zh']} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={ogImage} />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -91,7 +111,7 @@ const BAIDU_PUSH_SNIPPET =
     )}
   </head>
   <body>
-    <a class="skip-link" href="#main">跳到正文</a>
+    <a class="skip-link" href="#main">{t.a11y.skipToContent}</a>
     <SiteHeader />
     <main id="main">
       <slot />

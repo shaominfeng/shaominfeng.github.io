@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import WorkView from '../../../components/WorkView.astro';
+import { UI } from '../../../i18n/ui';
+
+const t = UI.en;
+---
+
+<BaseLayout title={t.meta.workTitle} description={t.meta.workDescription}>
+  <WorkView lang="en" />
+</BaseLayout>

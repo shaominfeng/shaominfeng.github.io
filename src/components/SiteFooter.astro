@@ -1,5 +1,10 @@
 ---
-import { SITE } from '../data/site';
+import { SITE, getNav } from '../data/site';
+import { UI, getLangFromUrl } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url.pathname);
+const t = UI[lang];
+const nav = getNav(lang);
 ---
 
 <footer class="site-footer">
@@ -9,26 +14,24 @@ import { SITE } from '../data/site';
         <span class="seal" aria-hidden="true">AS</span>
         <div>
           <strong>{SITE.name}</strong>
-          <span>{SITE.role}</span>
+          <span>{t.meta.role}</span>
         </div>
       </div>
       <div class="footer-links">
-        <a href="/work/">项目</a>
-        <a href={SITE.blogUrl}>文章</a>
-        <a href="/about/">关于</a>
+        {nav.map((item) => <a href={item.href}>{item.label}</a>)}
         <a href={'mailto:' + SITE.email}>Email</a>
         <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
         <a href="/rss.xml">RSS</a>
       </div>
       <p class="footer-note">
-        做平台，也写代码。把踩过的坑，写清楚。
-        <em>Keep Passion.</em>
+        {t.footer.note}
+        <em>{t.footer.noteEm}</em>
       </p>
     </div>
     <div class="footer-bottom">
       <span>© 2026 {SITE.name}</span>
-      <span>用 Astro 构建 · 部署于 GitHub Pages · 无跟踪脚本</span>
-      <span>最后更新 {SITE.updated}</span>
+      <span>{t.footer.builtWith}</span>
+      <span>{t.footer.updated} {SITE.updated}</span>
     </div>
   </div>
 </footer>

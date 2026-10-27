@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HomeView from '../../components/HomeView.astro';
+import { SITE } from '../../data/site';
+import { UI } from '../../i18n/ui';
+
+const t = UI.en;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.name,
+  alternateName: '邵敏峰',
+  jobTitle: 'Full-stack engineer / AI agent & cloud security',
+  description: t.meta.siteDescription,
+  url: SITE.siteUrl + '/en/',
+  email: 'mailto:' + SITE.email,
+  sameAs: [SITE.github, SITE.blogUrl],
+  knowsAbout: ['AI Agent', 'MCP', 'Agent Skills', 'Cloud Security', 'Platform Engineering', 'TypeScript'],
+};
+---
+
+<BaseLayout title={SITE.name} description={t.meta.siteDescription} structuredData={structuredData}>
+  <HomeView lang="en" />
+</BaseLayout>

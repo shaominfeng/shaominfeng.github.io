@@ -1,16 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../data/site';
+import { UI } from '../i18n/ui';
+
+// 404 由任意路径触发，构建产物只有一个 HTML，
+// 因此这里中英文并列展示，而不是按路径切换。
+const zh = UI.zh;
+const en = UI.en;
 ---
 
-<BaseLayout title="页面不存在" description="这个页面不存在，回到首页继续浏览。" noindex>
+<BaseLayout title={zh.meta.notFoundTitle} description={zh.meta.notFoundDescription} noindex>
   <div class="shell notfound">
     <span class="code">404</span>
-    <h1>这里什么也没有</h1>
-    <p>链接可能已经移动。旧的报告链接会自动跳转到新的文章集。</p>
+    <h1>{zh.notFound.heading}</h1>
+    <p>{zh.notFound.body}</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <a class="btn btn-primary" href="/">回到首页 <span aria-hidden="true">→</span></a>
-      <a class="btn btn-ghost" href={SITE.blogUrl}>去文章集</a>
+      <a class="btn btn-primary" href="/">{zh.notFound.backHome} <span aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost" href={SITE.blogUrl}>{zh.notFound.toBlog}</a>
+    </div>
+
+    <hr style="margin:44px 0 32px;border:0;border-top:1px solid var(--line)" />
+
+    <h2 style="font-family:var(--serif);font-size:26px;font-weight:400;margin:0 0 10px" lang="en">
+      {en.notFound.heading}
+    </h2>
+    <p lang="en">{en.notFound.body}</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn btn-primary" href="/en/" lang="en">{en.notFound.backHome} <span aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost" href={SITE.blogUrl} lang="en">{en.notFound.toBlog}</a>
     </div>
   </div>
 

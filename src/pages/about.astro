@@ -1,12 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AboutView from '../components/AboutView.astro';
 import { SITE } from '../data/site';
+import { UI } from '../i18n/ui';
+
+const t = UI.zh;
 
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
   name: '关于 Allen Shao',
-  description: SITE.description,
+  description: t.meta.aboutDescription,
   url: new URL('/about/', Astro.site).toString(),
   mainEntity: {
     '@type': 'Person',
@@ -20,95 +24,6 @@ const structuredData = {
 };
 ---
 
-<BaseLayout title="关于" description="Allen Shao，全栈工程师，专注 AI Agent、云安全与开发者体验。3 年企业 AI 平台实践。" structuredData={structuredData}>
-  <div class="shell about-hero">
-    <div>
-      <p class="label">About / Allen Shao</p>
-      <h1>写代码，<br />也写清楚。</h1>
-      <p>
-        我是 Allen Shao，一名全栈工程师。过去三年，我在做一件事：把大模型从「演示」变成「可用的内部产品」。
-        做平台，也写代码；做工程，也写复盘。
-      </p>
-    </div>
-    <div class="about-mark" aria-hidden="true">
-      <span>AS</span>
-      <small>ALLEN SHAO · 2026</small>
-    </div>
-  </div>
-
-  <div class="shell about-long">
-    <div>
-      <h2>现在</h2>
-      <p>
-        主要关注三件事：Agent 如何真正落地、平台如何把模型能力变成组织能力、开发者如何用更少的摩擦把事做完。
-      </p>
-      <p>
-        日常在 TypeScript / Node.js 与 Python 之间切换，做 API Gateway、Portal、MCP Server、成本与权限系统。
-        也花很多时间在 Claude Code 里：不是让它替我打字，而是把任务拆成可验收的步骤。
-      </p>
-
-      <h2>过去</h2>
-      <p>
-        2023 年，从企业 AI 平台的 POC 开始，参与它从基础设施到服务化、再到生态化的过程。
-        平台从几十个试用者走到 4,000+ 用户，我也从「接模型」走到「设计边界」。
-      </p>
-      <p>
-        2026 年，把三年的观察写成《从对话到协作》：14 章、2.1 万字；也把最近一年的 Agent 工作流写成单篇《工程师 Agentic Coding 的一天》。写作让我把很多模糊的直觉，变成了可以检验的判断。
-      </p>
-
-      <h2>怎么做</h2>
-      <p>
-        技术上，我偏好「可替换、可审计、可接手」：模型可以换，工具调用有记录，成本能算到团队，Agent 能回滚。
-        产品上，我相信少即是多：一个 5 分钟能读完的晨报，比一个功能齐全但没人打开的仪表盘更有价值。
-      </p>
-    </div>
-
-    <div>
-      <dl class="fact-grid">
-        <div class="fact"><dt>Base</dt><dd>中国 · 双语工作</dd></div>
-        <div class="fact"><dt>Role</dt><dd>全栈工程师</dd></div>
-        <div class="fact"><dt>Focus</dt><dd>AI Agent / 云安全</dd></div>
-        <div class="fact"><dt>Experience</dt><dd>3 年 AI 平台</dd></div>
-        <div class="fact"><dt>Writing</dt><dd>14 章 + 1 篇单篇</dd></div>
-        <div class="fact"><dt>Open to</dt><dd>AI Agent / 平台工程</dd></div>
-      </dl>
-
-      <div style="margin-top:28px">
-        <div class="skill-block">
-          <h3>Languages</h3>
-          <ul class="skill-list">
-            <li>TypeScript</li><li>JavaScript</li><li>Python</li><li>Java</li>
-          </ul>
-        </div>
-        <div class="skill-block" style="margin-top:12px">
-          <h3>AI / Agent</h3>
-          <ul class="skill-list">
-            <li>Claude Code</li><li>MCP</li><li>Agent Skills</li><li>RAG</li><li>Context Engineering</li>
-          </ul>
-        </div>
-        <div class="skill-block" style="margin-top:12px">
-          <h3>Platform</h3>
-          <ul class="skill-list">
-            <li>Node.js</li><li>React</li><li>Docker / K8s</li><li>OIDC</li><li>Cost / Observability</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="contact-line">
-        <a href={'mailto:' + SITE.email}>Email</a>
-        <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-        <a href={SITE.blogUrl} target="_blank" rel="noopener noreferrer">文章集 ↗</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="shell">
-    <div class="open-box">
-      <h2>开放交流</h2>
-      <p>
-        如果你在做 AI Agent、平台工程或云安全相关的事，欢迎聊聊。无论是技术问题、合作，还是一个还没想清楚的想法。
-      </p>
-      <a class="btn btn-primary" href={'mailto:' + SITE.email}>发一封邮件 <span aria-hidden="true">→</span></a>
-    </div>
-  </div>
+<BaseLayout title={t.meta.aboutTitle} description={t.meta.aboutDescription} structuredData={structuredData}>
+  <AboutView lang="zh" />
 </BaseLayout>

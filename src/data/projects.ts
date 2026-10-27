@@ -37,6 +37,10 @@ export interface Project {
  * 项目内容暂缓发布，数组保持为空 —— 首页与项目页会按 PROJECT_SLOTS
  * 渲染等量的占位卡片。补齐内容时，往数组里加对象即可：首页卡片、
  * /work/ 列表和 /work/<slug>/ 详情页都会自动生成。
+ *
+ * 注意：项目详情页目前只有中文版（src/pages/work/[slug].astro）。
+ * 往数组里填内容时，需要同步给 Project 增加英文文案字段，并在
+ * src/pages/en/work/ 下加同样的 [slug].astro，英文版才会有详情页。
  */
 export const PROJECTS: Project[] = [];
 

@@ -1,0 +1,68 @@
+---
+import { SITE } from '../data/site';
+import { UI, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = UI[lang];
+const a = t.about;
+---
+
+<div class="shell about-hero">
+  <div>
+    <p class="label">{a.label}</p>
+    <h1>{a.headingA}<br />{a.headingB}</h1>
+    <p>{a.intro}</p>
+  </div>
+  <div class="about-mark" aria-hidden="true">
+    <span>AS</span>
+    <small>{a.markSmall}</small>
+  </div>
+</div>
+
+<div class="shell about-long">
+  <div>
+    {a.sections.map((section) => (
+      <>
+        <h2>{section.title}</h2>
+        {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </>
+    ))}
+  </div>
+
+  <div>
+    <dl class="fact-grid">
+      {a.facts.map((fact) => (
+        <div class="fact"><dt>{fact.term}</dt><dd>{fact.detail}</dd></div>
+      ))}
+    </dl>
+
+    <div style="margin-top:28px">
+      {a.skills.map((skill, index) => (
+        <div class="skill-block" style={index === 0 ? undefined : 'margin-top:12px'}>
+          <h3>{skill.title}</h3>
+          <ul class="skill-list">
+            {skill.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="contact-line">
+      <a href={'mailto:' + SITE.email}>Email</a>
+      <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      <a href={SITE.blogUrl} target="_blank" rel="noopener noreferrer">{t.home.contactBlog} ↗</a>
+    </div>
+  </div>
+</div>
+
+<div class="shell">
+  <div class="open-box">
+    <h2>{a.openTitle}</h2>
+    <p>{a.openBody}</p>
+    <a class="btn btn-primary" href={'mailto:' + SITE.email}>{a.openCta} <span aria-hidden="true">→</span></a>
+  </div>
+</div>

@@ -1027,6 +1027,40 @@ a.section-note:hover {
   text-transform: uppercase;
 }
 
+/* ——— project placeholders ——— */
+
+.work-card.is-placeholder,
+.work-feature.is-placeholder {
+  border-style: dashed;
+  background: transparent;
+}
+
+.is-placeholder .wc-media,
+.work-feature.is-placeholder .wf-media {
+  display: grid;
+  place-items: center;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 10px, rgba(21, 18, 14, 0.035) 10px 11px),
+    var(--paper-2);
+}
+
+.work-feature.is-placeholder .wf-media {
+  align-content: center;
+  gap: 8px;
+}
+
+.placeholder-mark {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.is-muted {
+  color: var(--ink-3);
+}
+
 /* ——— writing ——— */
 
 .writing-list {

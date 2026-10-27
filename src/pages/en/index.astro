@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HomeView from '../../components/HomeView.astro';
-import { SITE } from '../../data/site';
+import { SITE, getBlogUrl } from '../../data/site';
 import { UI } from '../../i18n/ui';
 
 const t = UI.en;
@@ -15,7 +15,7 @@ const structuredData = {
   description: t.meta.siteDescription,
   url: SITE.siteUrl + '/en/',
   email: 'mailto:' + SITE.email,
-  sameAs: [SITE.github, SITE.blogUrl],
+  sameAs: [SITE.github, getBlogUrl('en')],
   knowsAbout: ['AI Agent', 'MCP', 'Agent Skills', 'Cloud Security', 'Platform Engineering', 'TypeScript'],
 };
 ---

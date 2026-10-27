@@ -118,7 +118,6 @@ const zh = {
     viewProject: (title: string) => `查看项目：${title}`,
     writingFoot: '以上几篇，有系列里最适合单独阅读的章节，也有一篇完整的工作流长文。文章集会持续更新。',
     writingFootLink: '进入文章集 ↗',
-    writingLangNote: '',
     numbers: {
       users: '企业平台用户',
       mcp: 'MCP Servers 开发 / 集成',
@@ -328,7 +327,6 @@ const en: Dict = {
     writingFoot:
       'A few of these read well on their own; one is a full workflow essay. The collection keeps growing.',
     writingFootLink: 'Enter the collection ↗',
-    writingLangNote: 'Essays are published in Chinese — titles and summaries here are translated.',
     numbers: {
       users: 'Enterprise platform users',
       mcp: 'MCP servers built / integrated',

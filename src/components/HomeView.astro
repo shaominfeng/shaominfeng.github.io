@@ -1,6 +1,6 @@
 ---
 import '../styles/home.css';
-import { SITE } from '../data/site';
+import { SITE, getBlogUrl } from '../data/site';
 import { PROJECTS, PROJECT_SLOTS } from '../data/projects';
 import { FEATURED_ARTICLES } from '../data/articles';
 import { TIMELINE } from '../data/timeline';
@@ -21,11 +21,11 @@ const stats = await getGithubStats();
 const stages = h.stages;
 const workPath = localePath('/work/', lang);
 
-/** 文章按语言取标题/摘要，原文链接不变（正文仍为中文） */
+/** 文章按语言取标题/摘要与链接：英文页直接指向博客英文版 */
 const articles = FEATURED_ARTICLES.map((article) =>
   isZh
     ? { title: article.title, subtitle: article.subtitle, excerpt: article.excerpt, part: article.part, minutes: article.minutes, tags: article.tags, href: article.href }
-    : { ...article.en, minutes: article.minutes, tags: article.tags, href: article.href }
+    : { ...article.en, minutes: article.minutes, tags: article.tags, href: article.enHref }
 );
 
 /** 时间线按语言取文案 */
@@ -46,7 +46,7 @@ const milestones = TIMELINE.map((item) => (isZh ? item : { ...item, ...item.en }
       <p class="hero-desc">{h.heroDesc}</p>
       <div class="hero-actions">
         <a class="btn btn-light" href={workPath}>{h.ctaWork} <span aria-hidden="true">→</span></a>
-        <a class="btn btn-outline-light" href={SITE.blogUrl}>{h.ctaRead}</a>
+        <a class="btn btn-outline-light" href={getBlogUrl(lang)}>{h.ctaRead}</a>
       </div>
       <p class="hero-note">
         {h.notes.map((note) => <span>{note}</span>)}
@@ -90,7 +90,7 @@ const milestones = TIMELINE.map((item) => (isZh ? item : { ...item, ...item.en }
     <span class="gw-foot"><span>{h.gwProjects.foot}</span><span class="gw-arrow">→</span></span>
     <span class="gw-count" aria-hidden="true">—</span>
   </a>
-  <a class="gateway-card gw-articles" href={SITE.blogUrl}>
+  <a class="gateway-card gw-articles" href={getBlogUrl(lang)}>
     <span class="gw-label">{h.gwArticles.label}</span>
     <h2 class="gw-title">{h.gwArticles.title}</h2>
     <p class="gw-desc">{h.gwArticles.desc}</p>
@@ -188,7 +188,7 @@ const milestones = TIMELINE.map((item) => (isZh ? item : { ...item, ...item.en }
       <span class="section-index">02</span>
       <h2 class="section-title">{h.sectionWriting}</h2>
     </div>
-    <a class="section-note" href={SITE.blogUrl}>{h.sectionWritingNote}</a>
+    <a class="section-note" href={getBlogUrl(lang)}>{h.sectionWritingNote}</a>
   </div>
 
   <div class="writing-list">
@@ -212,8 +212,7 @@ const milestones = TIMELINE.map((item) => (isZh ? item : { ...item, ...item.en }
 
   <div class="writing-footer">
     <p>{h.writingFoot}</p>
-    {h.writingLangNote && <p class="writing-lang-note">{h.writingLangNote}</p>}
-    <a class="text-link" href={SITE.blogUrl} target="_blank" rel="noopener noreferrer">{h.writingFootLink}</a>
+    <a class="text-link" href={getBlogUrl(lang)} target="_blank" rel="noopener noreferrer">{h.writingFootLink}</a>
   </div>
 </section>
 
@@ -288,7 +287,7 @@ const milestones = TIMELINE.map((item) => (isZh ? item : { ...item, ...item.en }
       <div class="contact-line">
         <a href={'mailto:' + SITE.email}>Email</a>
         <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-        <a href={SITE.blogUrl}>{h.contactBlog}</a>
+        <a href={getBlogUrl(lang)}>{h.contactBlog}</a>
       </div>
     </div>
 

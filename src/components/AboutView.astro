@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../data/site';
+import { SITE, getBlogUrl } from '../data/site';
 import { UI, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -54,7 +54,7 @@ const a = t.about;
     <div class="contact-line">
       <a href={'mailto:' + SITE.email}>Email</a>
       <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-      <a href={SITE.blogUrl} target="_blank" rel="noopener noreferrer">{t.home.contactBlog} ↗</a>
+      <a href={getBlogUrl(lang)} target="_blank" rel="noopener noreferrer">{t.home.contactBlog} ↗</a>
     </div>
   </div>
 </div>

@@ -9,6 +9,18 @@ export interface Section {
   bullets?: string[];
 }
 
+export interface ProjectText {
+  title: string;
+  tagline: string;
+  description: string;
+  role: string;
+  status: string;
+  demoLabel: string;
+  metrics: Metric[];
+  sections: Section[];
+  note?: string;
+}
+
 export interface Project {
   slug: string;
   index: string;
@@ -29,6 +41,11 @@ export interface Project {
   metrics: Metric[];
   sections: Section[];
   note?: string;
+  /**
+   * 英文文案。填了才会生成 /en/work/<slug>/ 详情页；
+   * 不填时英文列表页会退回中文项目名（只加 /en/ 路径）。
+   */
+  enText?: ProjectText;
 }
 
 /**
@@ -38,11 +55,27 @@ export interface Project {
  * 渲染等量的占位卡片。补齐内容时，往数组里加对象即可：首页卡片、
  * /work/ 列表和 /work/<slug>/ 详情页都会自动生成。
  *
- * 注意：项目详情页目前只有中文版（src/pages/work/[slug].astro）。
- * 往数组里填内容时，需要同步给 Project 增加英文文案字段，并在
- * src/pages/en/work/ 下加同样的 [slug].astro，英文版才会有详情页。
+ * 英文详情页（/en/work/<slug>/）由 src/pages/en/work/[slug].astro 渲染。
+ * 只要在对象里补上 enText，英文页就会用英文文案；不补则退回中文文案
+ * 放在英文路径下（不推荐，会被搜索引擎判为重复内容）。
  */
 export const PROJECTS: Project[] = [];
+
+/** 按语言取项目文案：英文缺 enText 时退回中文 */
+export function projectText(project: Project, lang: 'zh' | 'en'): ProjectText {
+  if (lang === 'en' && project.enText) return project.enText;
+  return {
+    title: project.title,
+    tagline: project.tagline,
+    description: project.description,
+    role: project.role,
+    status: project.status,
+    demoLabel: project.demoLabel,
+    metrics: project.metrics,
+    sections: project.sections,
+    note: project.note,
+  };
+}
 
 /** 预留给未来项目的占位数（页面按此渲染空占位卡片） */
 export const PROJECT_SLOTS = 2;

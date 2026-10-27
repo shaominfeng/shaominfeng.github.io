@@ -49,6 +49,12 @@ npm run preview
 - 新增页面时：在 `src/i18n/ui.ts` 的 `zh` 里写文案，`en` 缺字段会报类型错误；页面用 `HomeView` 之类共用组件，再在 `src/pages/` 与 `src/pages/en/` 各放一个薄壳
 - `404.html` 只有一个产物，所以中英并列展示
 
+### 博客与项目详情页
+
+- 文章正文的英文版在博客仓库里（`src/content/articles/en/**`），地址是 `/blog/en/...`；主站英文页的「文章」入口与首页文章卡都指向英文版（`src/data/site.ts` 的 `getBlogUrl(lang)`、`src/data/articles.ts` 的 `enHref`）
+- 项目详情页：中文 `src/pages/work/[slug].astro`，英文 `src/pages/en/work/[slug].astro`
+- 往 `PROJECTS` 里加项目时，补一个 `enText` 对象（含 title / tagline / description / role / status / demoLabel / metrics / sections）才有真正的英文详情页；缺 `enText` 时英文页会退回中文文案（不推荐）
+
 ## 部署
 
 ### 海外（GitHub Pages）

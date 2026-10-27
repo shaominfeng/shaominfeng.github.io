@@ -7,7 +7,9 @@ export interface Article {
   part: string;
   tags: string[];
   href: string;
-  /** 英文版文案（/en/ 页面使用；原文仍为中文） */
+  /** 英文版文章地址（博客的英文版 /blog/en/） */
+  enHref: string;
+  /** 英文版文案（/en/ 页面使用） */
   en: {
     title: string;
     subtitle: string;
@@ -18,6 +20,7 @@ export interface Article {
 
 const SITE_URL = (import.meta.env.SITE || 'https://shaominfeng.github.io').replace(/\/+$/, '');
 const BLOG = SITE_URL + '/blog/ai-evolution';
+const EN_BLOG = SITE_URL + '/blog/en/ai-evolution';
 
 
 export const FEATURED_ARTICLES: Article[] = [
@@ -31,6 +34,7 @@ export const FEATURED_ARTICLES: Article[] = [
     part: '单篇',
     tags: ['Agentic Coding', '工作流'],
     href: SITE_URL + '/blog/essays/a-day-of-agentic-coding/',
+    enHref: SITE_URL + '/blog/en/essays/a-day-of-agentic-coding/',
     en: {
       title: 'A Day of Agentic Coding',
       subtitle: 'When AI stops being a tool and becomes a colleague that keeps running',
@@ -49,6 +53,7 @@ export const FEATURED_ARTICLES: Article[] = [
     part: '技术深潜',
     tags: ['上下文', '推理成本'],
     href: BLOG + '/context-revolution/',
+    enHref: EN_BLOG + '/context-revolution/',
     en: {
       title: 'The Context Revolution: 4K to 2M',
       subtitle: 'After 500× growth, cost is the next battlefield',
@@ -67,6 +72,7 @@ export const FEATURED_ARTICLES: Article[] = [
     part: '技术深潜',
     tags: ['Agent', 'Skills', 'MCP'],
     href: BLOG + '/agent-skills/',
+    enHref: EN_BLOG + '/agent-skills/',
     en: {
       title: 'Agent Skills: the Innovation That Matters More Than MCP',
       subtitle: 'Turning domain knowledge into installable assets',
@@ -85,6 +91,7 @@ export const FEATURED_ARTICLES: Article[] = [
     part: '洞察',
     tags: ['推理层', '架构'],
     href: BLOG + '/new-paradigm/',
+    enHref: EN_BLOG + '/new-paradigm/',
     en: {
       title: 'The New Paradigm: the Inference Layer Is the Core',
       subtitle: 'Same model, different serving teams',

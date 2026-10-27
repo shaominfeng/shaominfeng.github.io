@@ -20,12 +20,17 @@ export const SITE = {
   updated: '2026.10',
 };
 
-/** 主导航（按语言生成，文章集指向中文博客） */
+/** 博客入口：英文页指向博客的英文版 /blog/en/ */
+export function getBlogUrl(lang: Lang) {
+  return lang === 'en' ? SITE_URL + '/blog/en/' : SITE.blogUrl;
+}
+
+/** 主导航（按语言生成，文章集指向对应语言的博客） */
 export function getNav(lang: Lang) {
   const t = UI[lang];
   return [
     { href: localePath('/work/', lang), label: t.nav.work },
-    { href: SITE.blogUrl, label: t.nav.writing },
+    { href: getBlogUrl(lang), label: t.nav.writing },
     { href: localePath('/about/', lang), label: t.nav.about },
   ];
 }

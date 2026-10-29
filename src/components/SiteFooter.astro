@@ -21,7 +21,7 @@ const nav = getNav(lang);
         {nav.map((item) => <a href={item.href}>{item.label}</a>)}
         <a href={'mailto:' + SITE.email}>Email</a>
         <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-        <a href="/rss.xml">RSS</a>
+        <a href={SITE.blogUrl + 'rss.xml'} target="_blank" rel="noopener noreferrer">RSS ↗</a>
       </div>
       <p class="footer-note">
         {t.footer.note}

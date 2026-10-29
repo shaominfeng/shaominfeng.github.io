@@ -1,8 +1,7 @@
 ---
 import '../styles/home.css';
-import { SITE, getBlogUrl } from '../data/site';
+import { SITE, getBlogUrl, getEssaysUrl, getSeriesUrl } from '../data/site';
 import { PROJECTS, PROJECT_SLOTS } from '../data/projects';
-import { getWritingFeed, writingBlock } from '../data/writing';
 import { TIMELINE } from '../data/timeline';
 import { getGithubStats } from '../lib/github';
 import { UI, localePath, type Lang } from '../i18n/ui';
@@ -22,40 +21,12 @@ const stages = h.stages;
 const workPath = localePath('/work/', lang);
 
 /**
- * 写作区完全由博客的 /blog/writing.json 驱动 —— 本仓库不保存任何文章副本。
- * 拿不到清单时降级成“系列 / 单篇 / 全部”三个入口，不阻塞构建。
+ * 写作区只有入口，不含任何博客内容 —— 不读接口、不抄文章、不统计篇数。
+ * 博客那边加文章、加章节，这里一个字都不用改。
  */
-const feed = await getWritingFeed();
-const block = writingBlock(feed, lang);
-
-const articles = (block?.latest ?? []).map((item) => ({
-  title: item.title,
-  subtitle: item.subtitle || item.seriesTitle,
-  excerpt: item.excerpt,
-  meta: [item.kind === 'essay' ? (isZh ? '单篇' : 'Essay') : item.part || item.seriesTitle, `${item.minutes} min`]
-    .filter(Boolean)
-    .join(' · '),
-  tags: item.tags,
-  date: item.date,
-  href: SITE.siteUrl + item.path,
-}));
-
-const articleCount = block ? String(block.totals.chapters + block.totals.essays) : h.gwArticles.count;
-
-const writingStat = block
-  ? h.numbers.writingStat(
-      block.totals.chapters,
-      block.totals.essays,
-      block.totals.words,
-      block.totals.wordsUnit,
-      block.totals.sources
-    )
-  : h.numbers.writing;
-
-const fallbackLinks = [
-  { label: h.writingFallback.series, href: getBlogUrl(lang) + 'ai-evolution/' },
-  { label: h.writingFallback.essays, href: getBlogUrl(lang) + 'essays/' },
-  { label: h.writingFallback.all, href: getBlogUrl(lang) },
+const writingEntries = [
+  { title: h.writingEntries.series.title, desc: h.writingEntries.series.desc, href: getSeriesUrl(lang) },
+  { title: h.writingEntries.essays.title, desc: h.writingEntries.essays.desc, href: getEssaysUrl(lang) },
 ];
 
 /** 时间线按语言取文案 */
@@ -125,7 +96,7 @@ const milestones = TIMELINE.map((item) => (isZh ? item : { ...item, ...item.en }
     <h2 class="gw-title">{h.gwArticles.title}</h2>
     <p class="gw-desc">{h.gwArticles.desc}</p>
     <span class="gw-foot"><span>{h.gwArticles.foot}</span><span class="gw-arrow">→</span></span>
-    <span class="gw-count" aria-hidden="true">{articleCount}</span>
+    <span class="gw-count" aria-hidden="true">{h.gwArticles.count}</span>
   </a>
 </section>
 
@@ -222,33 +193,16 @@ const milestones = TIMELINE.map((item) => (isZh ? item : { ...item, ...item.en }
   </div>
 
   <div class="writing-list">
-    {articles.length > 0
-      ? articles.map((article, index) => (
-          <a class="writing-row" href={article.href} target="_blank" rel="noopener noreferrer">
-            <span class="wr-num">{String(index + 1).padStart(2, '0')}</span>
-            <span>
-              <span class="wr-title">{article.title}</span>
-              <span class="wr-sub">{article.subtitle}</span>
-              <span class="wr-excerpt">{article.excerpt}</span>
-            </span>
-            <span class="wr-meta">
-              <span>{article.meta}</span>
-              <span class="wr-tags">
-                {article.tags.map((tag) => <span class="tag">{tag}</span>)}
-              </span>
-            </span>
-          </a>
-        ))
-      : fallbackLinks.map((link, index) => (
-          <a class="writing-row" href={link.href} target="_blank" rel="noopener noreferrer">
-            <span class="wr-num">{String(index + 1).padStart(2, '0')}</span>
-            <span>
-              <span class="wr-title">{link.label}</span>
-              <span class="wr-sub">{h.writingFallbackEmpty}</span>
-            </span>
-            <span class="wr-meta"><span>↗</span></span>
-          </a>
-        ))}
+    {writingEntries.map((entry, index) => (
+      <a class="writing-row" href={entry.href} target="_blank" rel="noopener noreferrer">
+        <span class="wr-num">{String(index + 1).padStart(2, '0')}</span>
+        <span>
+          <span class="wr-title">{entry.title}</span>
+          <span class="wr-sub">{entry.desc}</span>
+        </span>
+        <span class="wr-meta"><span>{h.writingEntryCta}</span></span>
+      </a>
+    ))}
   </div>
 
   <div class="writing-footer">
@@ -279,7 +233,7 @@ const milestones = TIMELINE.map((item) => (isZh ? item : { ...item, ...item.en }
     </div>
     <div class="community-bar">
       <span>GitHub · {stats.stars} stars / {stats.followers} followers / {stats.repos} public repos</span>
-      <span>{writingStat}</span>
+      <span>{h.numbers.writing}</span>
       <a href={SITE.github} target="_blank" rel="noopener noreferrer">{h.numbers.follow}</a>
     </div>
   </div>

@@ -11,7 +11,7 @@ Allen Shao 的个人主页：个人介绍 + 文章与项目两个入口。
 - `/blog/` — 写作，独立仓库部署（[blog](https://github.com/shaominfeng/blog)）
 - `/about/` — 个人介绍、技能与联系方式
 - `/en/`、`/en/work/`、`/en/about/` — 英文版，与上面一一对应
-- `/rss.xml` — 由博客的 `writing.json` 生成，不再是手抄清单
+- `/rss.xml` — 已移除；订阅请用博客的 `/blog/rss.xml`（页头 `<link rel="alternate">` 已指向它）
 - `/writing/`、`/ai-evolution/` — 旧链接，重定向到 `/blog/` 与 `/blog/ai-evolution/`
 
 ## 技术栈
@@ -36,7 +36,7 @@ npm run preview
 - 界面文案：`src/i18n/ui.ts` —— 中英文文案的唯一来源
 - 页面结构：`src/components/HomeView.astro`、`AboutView.astro`、`WorkView.astro` —— 中英文共用，按 `lang` 取文案
 - 时间线：`src/data/timeline.ts` —— 每条带 `en` 字段
-- 写作区块：**不需要维护**。由博客的 `/blog/writing.json` 驱动，见 `src/data/writing.ts`
+- 写作区：**不需要维护**，只有两个入口链接 + 一个跳转博客的链接，见 `src/components/HomeView.astro` 的 `writingEntries`
 - 站点信息：`src/data/site.ts`
 
 ## 多语言
@@ -51,13 +51,13 @@ npm run preview
 
 ### 博客与项目详情页
 
-- 文章正文在博客仓库里（`src/content/articles/{zh,en}/**`），地址是 `/blog/...` 与 `/blog/en/...`；主页的写作入口与首页写作区都由博客数据驱动（`src/data/site.ts` 的 `getBlogUrl(lang)`）
+- 文章正文全在博客仓库里（`src/content/articles/{zh,en}/**`），地址是 `/blog/...` 与 `/blog/en/...`；主页只放指向它们的链接（`src/data/site.ts` 的 `getBlogUrl(lang)` / `getSeriesUrl(lang)` / `getEssaysUrl(lang)`）
 - 项目详情页：中文 `src/pages/work/[slug].astro`，英文 `src/pages/en/work/[slug].astro`
 - 往 `PROJECTS` 里加项目时，补一个 `enText` 对象（含 title / tagline / description / role / status / demoLabel / metrics / sections）才有真正的英文详情页；缺 `enText` 时英文页会退回中文文案（不推荐）
 
-## 与博客仓库的关系
+## 与博客仓库的关系：只共享 URL，不共享数据
 
-主页（本仓库）与博客（`shaominfeng/blog`）是两个独立仓库、两次独立部署，共用同一个域名：
+主页（本仓库）与博客（`shaominfeng/blog`）是两个独立仓库、各自部署，共用同一个域名：
 
 | | 主页 | 博客 |
 |---|---|---|
@@ -65,27 +65,15 @@ npm run preview
 | 仓库 | 本仓库 | `shaominfeng/blog` |
 | 部署 | 本仓库 Actions → Pages | 博客自己的 Actions → Pages（项目页落在 `/blog/`） |
 
-**必要的联系只有三条，其余一律不该耦合：**
+**主页不读取博客的任何内容**：不拉 RSS、不读 JSON、不抄文章标题、不统计篇数。首页的「写作」区只是两个入口（系列连载 / 单篇长文）加一个「去博客看全部」的链接，正文和清单都在博客里。
 
-1. **URL 契约**：博客挂在 `/blog/` 前缀下，路由形如 `/blog/[series]/[slug]/`。主页所有写作链接都依赖它 —— 博客不能改 `base`，也不能改路由形态。
-2. **数据契约**：博客构建时输出 `/blog/writing.json`（中英双语：总量、系列、最近 6 篇）。主页只读它，见 `src/data/writing.ts`。字段只增不改，消费方要能容忍缺字段。
-3. **构建契约**：`npm run build:all`（国内部署）会把博客产物挂到 `dist/blog/`，所以两边 `base` 必须保持 `/` 与 `/blog`。
+因此：
 
-**加文章、加章节都不用动主页。** 博客推送 → 博客部署 →（可选）触发主页重建 → 主页写作区自动出现新内容。
+- **博客新增文章、章节、系列 → 本仓库零改动**，也不需要任何重建触发器或令牌
+- 本仓库任何时候构建都能通过，不存在"博客挂了导致主页构建失败"的情况
+- 唯一的约定是 URL：博客必须挂在 `/blog/` 下、路由为 `/blog/[series]/[slug]/`。这套 URL 只写在 `src/data/site.ts` 一个地方（`blogUrl` / `seriesUrl` / `essaysUrl` 及 `getBlogUrl` 等），博客真要改结构，改这一个文件即可
 
-`writing.json` 的读取顺序（`src/data/writing.ts`）：
-
-1. `BLOG_WRITING_JSON` 环境变量
-2. 本地 `../blog/dist/writing.json`（本地开发、`build:all`）
-3. 本地 `.build/blog/dist/writing.json`（`build:all` 克隆下来的博客）
-4. 线上 `https://<SITE_URL>/blog/writing.json`（GitHub Pages 单独构建时）
-5. 全失败 → 降级为「系列 / 单篇 / 全部」三个入口链接，构建不报错
-
-### 让主页自动跟上博客（可选，配一次就够）
-
-博客仓库 Settings → Secrets and variables → Actions → 新建 `HOMEPAGE_TOKEN`（Personal Access Token，`repo` 权限）。
-
-配好后，博客每次部署完成会 `repository_dispatch` 触发这个仓库（`deploy.yml` 已监听 `blog-updated`）重建，主页写作区立刻更新。不配也不会坏 —— 主页只会在自己下次推送时读到最新清单。
+国内部署时 `npm run build:all` 会把博客产物挂到 `dist/blog/`，那是**部署拼装**，不是数据依赖：主页源码里没有任何一处引用博客的文件。
 
 ## 部署
 

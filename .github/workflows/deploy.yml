@@ -3,9 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  # 博客发布后由 blog 仓库触发重建，主页才能读到新的 /blog/writing.json
-  repository_dispatch:
-    types: [blog-updated]
   workflow_dispatch:
 
 permissions:

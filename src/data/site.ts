@@ -14,15 +14,29 @@ export const SITE = {
   siteUrl: SITE_URL,
   blogUrl: SITE_URL + '/blog/',
   seriesUrl: SITE_URL + '/blog/ai-evolution/',
+  essaysUrl: SITE_URL + '/blog/essays/',
   blogRepo: 'https://github.com/shaominfeng/blog',
   aiHotUrl: SITE_URL + '/ai-hot-daily/',
   aiHotRepo: 'https://github.com/shaominfeng/ai-hot-daily',
   updated: '2026.10',
 };
 
-/** 博客入口：英文页指向博客的英文版 /blog/en/ */
+/**
+ * 博客入口：英文页指向博客的英文版 /blog/en/
+ * 主页不读取博客的任何内容，只保留这些链接 —— 两边唯一的约定就是 URL。
+ */
 export function getBlogUrl(lang: Lang) {
   return lang === 'en' ? SITE_URL + '/blog/en/' : SITE.blogUrl;
+}
+
+/** 单篇入口（跟随语言） */
+export function getEssaysUrl(lang: Lang) {
+  return getBlogUrl(lang) + 'essays/';
+}
+
+/** 系列入口（跟随语言） */
+export function getSeriesUrl(lang: Lang) {
+  return getBlogUrl(lang) + 'ai-evolution/';
 }
 
 /** 主导航（按语言生成，写作指向对应语言的博客） */

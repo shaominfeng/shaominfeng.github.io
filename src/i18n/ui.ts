@@ -35,7 +35,7 @@ export function localePath(path: string, lang: Lang): string {
 const zh = {
   meta: {
     siteDescription:
-      'Allen Shao，全栈工程师，专注 AI Agent、云安全与开发者体验。3 年企业 AI 平台实践，写代码，也把踩过的坑写成 14 章系列和单篇长文。',
+      'Allen Shao，全栈工程师，专注 AI Agent、云安全与开发者体验。3 年企业 AI 平台实践，写代码，也把踩过的坑写成系列与单篇长文。',
     role: '全栈工程师 · AI Agent 与云安全',
     aboutTitle: '关于',
     aboutDescription:
@@ -75,7 +75,7 @@ const zh = {
     heroLineEm: '「能干活」',
     heroLineTail: '。',
     heroDesc:
-      '3 年 AI 平台与 Agent 工程实践。做平台，也写代码；把踩过的坑，写成 2.6 万字的技术长文。',
+      '3 年 AI 平台与 Agent 工程实践。做平台，也写代码；把踩过的坑，写成技术长文。',
     ctaWork: '看项目',
     ctaRead: '读文章',
     notes: ['开放交流：AI Agent / 平台工程', 'Base in China', '中文 / English'],
@@ -116,18 +116,19 @@ const zh = {
     projectsFootLink: '项目路线 →',
     detail: '详情 →',
     viewProject: (title: string) => `查看项目：${title}`,
-    writingFoot: '以上按发布时间取最近几篇，系列章节与单篇混排。新增文章会自动出现在这里。',
+    writingFoot: '写作都在博客里，按发布时间排列。这里只留入口，不搬正文。',
     writingFootLink: '去博客看全部 ↗',
-    writingFallback: { series: '系列连载', essays: '单篇长文', all: '全部写作' },
-    writingFallbackEmpty: '写作清单暂时没取到，先直接去博客',
+    writingEntries: {
+      series: { title: '系列连载', desc: '长篇连载，按章顺序读下来是一条完整的线' },
+      essays: { title: '单篇长文', desc: '一次讲透一个问题：一条工作流、一个架构判断、一次复盘' },
+    },
+    writingEntryCta: '前往 ↗',
     numbers: {
       users: '企业平台用户',
       mcp: 'MCP Servers 开发 / 集成',
       stars: 'GitHub Stars',
       years: '年 AI 工程实践',
-      writing: '写作持续更新中',
-      writingStat: (chapters: number, essays: number, words: string, unit: string, sources: number) =>
-        `写作 ${words} ${unit} · ${chapters} 章 + ${essays} 篇 · ${sources} 份参考`,
+      writing: '系列与单篇 · 持续更新',
       follow: 'Follow on GitHub ↗',
     },
     timelineTitle: '时间线',
@@ -163,7 +164,7 @@ const zh = {
         title: '过去',
         paragraphs: [
           '2023 年，从企业 AI 平台的 POC 开始，参与它从基础设施到服务化、再到生态化的过程。平台从几十个试用者走到 4,000+ 用户，我也从「接模型」走到「设计边界」。',
-          '2026 年，把三年的观察写成《从对话到协作》：14 章、2.1 万字；也把最近一年的 Agent 工作流写成单篇《工程师 Agentic Coding 的一天》。写作让我把很多模糊的直觉，变成了可以检验的判断。',
+          '2026 年，把三年的观察写成系列《从对话到协作》；也把最近一年的 Agent 工作流写成单篇《工程师 Agentic Coding 的一天》。写作让我把很多模糊的直觉，变成了可以检验的判断。',
         ],
       },
       {
@@ -178,7 +179,7 @@ const zh = {
       { term: 'Role', detail: '全栈工程师' },
       { term: 'Focus', detail: 'AI Agent / 云安全' },
       { term: 'Experience', detail: '3 年 AI 平台' },
-      { term: 'Writing', detail: '14 章 + 1 篇单篇' },
+      { term: 'Writing', detail: '系列 + 单篇' },
       { term: 'Open to', detail: 'AI Agent / 平台工程' },
     ],
     skills: [
@@ -286,7 +287,7 @@ const en: Dict = {
     heroLineEm: '“it gets work done.”',
     heroLineTail: '',
     heroDesc:
-      'Three years of AI platform and agent engineering. I build the platform and write the code — then turn the sharp edges into 26,000 words of technical writing.',
+      'Three years of AI platform and agent engineering. I build the platform and write the code — then turn the sharp edges into long-form technical writing.',
     ctaWork: 'See the work',
     ctaRead: 'Read the writing',
     notes: ['Open to: AI agent / platform engineering', 'Base in China', 'Chinese / English'],
@@ -328,19 +329,19 @@ const en: Dict = {
     projectsFootLink: 'Project roadmap →',
     detail: 'Details →',
     viewProject: (title: string) => `View project: ${title}`,
-    writingFoot:
-      'The most recent pieces by publish date, chapters and standalone essays mixed. New writing shows up here automatically.',
+    writingFoot: 'All writing lives on the blog, ordered by publish date. This page only points there.',
     writingFootLink: 'See all writing ↗',
-    writingFallback: { series: 'The series', essays: 'Standalone essays', all: 'All writing' },
-    writingFallbackEmpty: 'The feed is unavailable right now — open the blog directly',
+    writingEntries: {
+      series: { title: 'The series', desc: 'A long serialised piece — read in order and it forms one continuous line' },
+      essays: { title: 'Standalone essays', desc: 'One piece, one question: a workflow, an architectural call, a post-mortem' },
+    },
+    writingEntryCta: 'Open ↗',
     numbers: {
       users: 'Enterprise platform users',
       mcp: 'MCP servers built / integrated',
       stars: 'GitHub Stars',
       years: 'Years of AI engineering',
-      writing: 'Writing, updated continuously',
-      writingStat: (chapters: number, essays: number, words: string, unit: string, sources: number) =>
-        `${words} ${unit} · ${chapters} chapters + ${essays} essays · ${sources} references`,
+      writing: 'A series and standalone essays · ongoing',
       follow: 'Follow on GitHub ↗',
     },
     timelineTitle: 'Timeline',
@@ -376,7 +377,7 @@ const en: Dict = {
         title: 'Then',
         paragraphs: [
           'In 2023 I joined the POC of an enterprise AI platform, and stayed through its shift from infrastructure to service to ecosystem. The platform grew from a few dozen trial users to 4,000+, and I moved from “connecting models” to “designing boundaries”.',
-          'In 2026 I wrote those three years down as “From Chat to Collaboration”: 14 chapters, 21,000 words. I also turned the past year of agent workflows into a standalone essay, “A Day of Agentic Coding”. Writing converts fuzzy intuition into claims that can be tested.',
+          'In 2026 I wrote those three years down as the series “From Chat to Collaboration”. I also turned the past year of agent workflows into a standalone essay, “A Day of Agentic Coding”. Writing converts fuzzy intuition into claims that can be tested.',
         ],
       },
       {
@@ -391,7 +392,7 @@ const en: Dict = {
       { term: 'Role', detail: 'Full-stack engineer' },
       { term: 'Focus', detail: 'AI agents / cloud security' },
       { term: 'Experience', detail: '3 years, AI platform' },
-      { term: 'Writing', detail: '14 chapters + 1 essay' },
+      { term: 'Writing', detail: 'A series + essays' },
       { term: 'Open to', detail: 'AI agent / platform engineering' },
     ],
     skills: [

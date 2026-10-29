@@ -95,12 +95,12 @@ export const TIMELINE: Milestone[] = [
     year: '2026',
     date: '2026.01',
     title: '发布《从对话到协作》',
-    description: '2.1 万字，14 章，把三年串成一条线。写作逼我把「感觉懂了」变成「真的懂了」。',
+    description: '14 章，把三年串成一条线。写作逼我把「感觉懂了」变成「真的懂了」。',
     tag: '写作',
     en: {
       title: 'Publishing “From Chat to Collaboration”',
       description:
-        '21,000 words, 14 chapters, three years pulled into one line. Writing forced “I get it” to become “I actually get it”.',
+        '14 chapters, three years pulled into one line. Writing forced “I get it” to become “I actually get it”.',
       tag: 'Writing',
     },
   },

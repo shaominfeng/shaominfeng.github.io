@@ -94,14 +94,26 @@ function readLocal(): WritingFeed | null {
   return null;
 }
 
+/**
+ * 线上读取：加查询串绕开 GitHub Pages CDN 缓存。
+ * 博客刚部署完就触发主页重建时，CDN 可能还在发旧副本，所以带时间戳
+ * 并重试两次 —— 否则新文章会晚一轮才出现在主页上。
+ */
 async function readRemote(): Promise<WritingFeed | null> {
-  try {
-    const response = await fetch(REMOTE_URL, { signal: AbortSignal.timeout(TIMEOUT_MS) });
-    if (!response.ok) return null;
-    return (await response.json()) as WritingFeed;
-  } catch {
-    return null;
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      const url = `${REMOTE_URL}?v=${Date.now()}`;
+      const response = await fetch(url, {
+        signal: AbortSignal.timeout(TIMEOUT_MS),
+        headers: { 'cache-control': 'no-cache' },
+      });
+      if (response.ok) return (await response.json()) as WritingFeed;
+      if (attempt < 3) await new Promise((resolve) => setTimeout(resolve, 3000));
+    } catch {
+      if (attempt < 3) await new Promise((resolve) => setTimeout(resolve, 3000));
+    }
   }
+  return null;
 }
 
 let cached: Promise<WritingFeed | null> | undefined;

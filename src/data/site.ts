@@ -8,7 +8,7 @@ export const SITE = {
   role: '全栈工程师 · AI Agent 与云安全',
   tagline: '把 AI 从「会聊天」做成「能干活」。',
   description:
-    'Allen Shao，全栈工程师，专注 AI Agent、云安全与开发者体验。3 年企业 AI 平台实践，写代码，也把踩过的坑写成 14 章系列和单篇长文。',
+    'Allen Shao，全栈工程师，专注 AI Agent、云安全与开发者体验。3 年企业 AI 平台实践，写代码，也把踩过的坑写成系列与单篇长文。',
   email: 'shaominfeng8@gmail.com',
   github: 'https://github.com/shaominfeng',
   siteUrl: SITE_URL,
@@ -25,7 +25,7 @@ export function getBlogUrl(lang: Lang) {
   return lang === 'en' ? SITE_URL + '/blog/en/' : SITE.blogUrl;
 }
 
-/** 主导航（按语言生成，文章集指向对应语言的博客） */
+/** 主导航（按语言生成，写作指向对应语言的博客） */
 export function getNav(lang: Lang) {
   const t = UI[lang];
   return [
